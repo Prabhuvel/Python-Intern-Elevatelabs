@@ -1,0 +1,2 @@
+n="Madam"
+n.lower()
