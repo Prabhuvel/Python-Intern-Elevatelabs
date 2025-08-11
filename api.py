@@ -11,15 +11,15 @@ users = [
 # GET all users
 @app.route("/users", methods=["GET"])
 def get_users():
-    return jsonify(users), 200  
+    return jsonify(users) 
 
 # GET single user by ID 
 @app.route("/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
-    for user in users:  # O(n)
+    for user in users: 
         if user["id"] == user_id:
-            return jsonify(user), 200
-    return jsonify({"error": "User not found"}), 404
+            return jsonify(user)
+    return jsonify({"error": "User not found"})
 
 # POST - Add a new user 
 @app.route("/users", methods=["POST"])
@@ -30,7 +30,7 @@ def create_user():
         if user["id"] > max_id:
             max_id = user["id"]
     new_user["id"] = max_id + 1
-    users.append(new_user)  # O(1)
+    users.append(new_user)  
     return jsonify(new_user), 201
 
 # PUT - Update user 
@@ -42,7 +42,7 @@ def update_user(user_id):
             for key in data:  
                 user[key] = data[key]
             return jsonify(user), 200
-    return jsonify({"error": "User not found"}), 404
+    return jsonify({"error": "User not found"})
 
 # DELETE - Remove user 
 @app.route("/users/<int:user_id>", methods=["DELETE"])
@@ -53,7 +53,8 @@ def delete_user(user_id):
         if user["id"] != user_id:
             new_list.append(user)
     users = new_list
-    return jsonify({"message": "User deleted"}), 200
+    return jsonify({"message": "User deleted"})
 
 if __name__ == "__main__":
     app.run(debug=True)
+
